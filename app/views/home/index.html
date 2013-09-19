@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div id="current" class="span6">
+      <div class="title">
+        <h2>Product Title</h2>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span9">
+          <img class="main_image"/>
+        </div>
+
+        <div class="general_status span3">
+          <div>
+            <h5><strong class="bids_count">x</strong> bids</h5>
+          </div>
+          <div>
+            <h5><strong class="remaining_seconds">x</strong> seconds</h5>
+          </div>
+
+          <div id="bids">
+            <ul>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="current_price">
+        <h3>Current price: $<span id="current_price">0.00</span></h3>
+      </div>
+
+      <div id="bid_buttons" class="row-fluid">
+        <div class="span4"><button value="100" class="btn btn-primary">$100</button></div>
+        <div class="span4"><button value="500" class="btn btn-warning">$500</button></div>
+        <div class="span4"><button value="1000" class="btn btn-danger">$1000</button></div>
+      </div>
+    </div>
+
+    <div id="queue" class="span3">
+    </div>
+  </div>
+</div>
+
+<script id="bid-event" type="text/html">
+  <li>
+    {{name}} offers ${{offer}}
+  </li>
+</script>
+
+<script type="text/javascript">
+  var BIDS_LIST_SIZE = 10;
+  $(document).ready(function() {
+    $.Mustache.addFromDom();
+  });
+
+  function addBidEvent(bidData) {
+    var bidsList = $('#bids ul');
+    bidsList.find('li').eq(BIDS_LIST_SIZE - 1).remove();
+    bidsList.prepend($.Mustache.render('bid-event', bidData));
+  }
+</script>
