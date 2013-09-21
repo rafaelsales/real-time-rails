@@ -16,3 +16,14 @@
 //= require jquery.mustache
 //= require twitter/bootstrap
 //= require_tree .
+
+var Loading = (function() {
+  return {
+    hide: function() {
+      $('#loading').hide();
+    },
+    show: function() {
+      $('#loading').show();
+    }
+  };
+})();

@@ -1,0 +1,20 @@
+<%= form_for :product, url: new_product_path, method: :post do |f| %>
+  <fieldset>
+    <legend>New Product</legend>
+
+    <%= f.label :title, 'Title' %>
+    <%= f.text_field :title %>
+
+    <%= f.label :image, 'Image URL' %>
+    <%= f.text_field :image %>
+
+    <%= submit_tag 'Start Auction' %>
+  </fieldset>
+<% end %>
+
+<%= form_tag sell_path, method: :patch do %>
+  <fieldset>
+    <legend>Sell Product</legend>
+    <%= submit_tag 'Sell Now!' %>
+  </fieldset>
+<% end %>

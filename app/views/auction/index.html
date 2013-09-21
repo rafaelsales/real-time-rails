@@ -2,31 +2,23 @@
   <div class="row-fluid">
     <div id="current" class="span6">
       <div class="title">
-        <h2>Product Title</h2>
+        <h2 id="product_title">Product name</h2>
       </div>
 
       <div class="row-fluid">
-        <div class="span9">
-          <img class="main_image"/>
+        <div class="image_container span9">
+          <img id="product_image"/>
         </div>
 
         <div class="general_status span3">
-          <div>
-            <h5><strong class="bids_count">x</strong> bids</h5>
-          </div>
-          <div>
-            <h5><strong class="remaining_seconds">x</strong> seconds</h5>
-          </div>
-
-          <div id="bids">
-            <ul>
-            </ul>
-          </div>
-        </div>
+          <ul id="bids" >
+          </ul>
       </div>
 
-      <div class="current_price">
-        <h3>Current price: $<span id="current_price">0.00</span></h3>
+      <div class="row-fluid">
+        <div class="current_price span12">
+          <h3>High bid: $<span id="high_bid">0.00</span> by <span id="high_bidder">someone</span></h3>
+        </div>
       </div>
 
       <div id="bid_buttons" class="row-fluid">
@@ -40,22 +32,28 @@
     </div>
   </div>
 </div>
+<div id="loading">
+  <div>Wait for a new auction</div>
+</div>
 
 <script id="bid-event" type="text/html">
   <li>
-    {{name}} offers ${{offer}}
+    {{bidder}} offers ${{amount}}
   </li>
 </script>
 
 <script type="text/javascript">
-  var BIDS_LIST_SIZE = 10;
+  $.Mustache.addFromDom();
+  Auction.initialize();
+
   $(document).ready(function() {
-    $.Mustache.addFromDom();
+    var username;
+    do {
+      var username = prompt("Your name:");
+      if (username == "")
+        alert("Don't be stupid. Enter your name...");
+    } while (username == "");
+    Auction.connect(username, "<%= connect_url(protocol: 'ws') %>");
   });
 
-  function addBidEvent(bidData) {
-    var bidsList = $('#bids ul');
-    bidsList.find('li').eq(BIDS_LIST_SIZE - 1).remove();
-    bidsList.prepend($.Mustache.render('bid-event', bidData));
-  }
 </script>

@@ -1,20 +1,47 @@
+body
+  padding: 10px
+
 #current
   .title
     text-align: center
   .general_status
     text-align: right
-  .img
-    max-width: 600px
-    max-height: 600px
+  .image_container
+    text-align: center
+    img
+      max-width: 200px
+      max-height: 200px
+    @media only screen and (max-device-width: 480px)
+      img
+        max-width: 100px
+        max-height: 100px
   .current_price
     text-align: center
 
 #bid_buttons
+  div
+    padding: 3px
   button
     width: 100%
     height: 40px
     font: bold 25px Monospace
 
-#bids
-  ul
-    list-style-type: none
+ul#bids
+  list-style-type: none
+  height: 120px
+  white-space: nowrap
+
+#loading
+  position: fixed
+  top: 0px
+  left: 0px
+  width: 100%
+  height: 100%
+  color: white
+  background: rgba(0,0,0,0.8)
+  display: table
+  div
+    font: bold 40pt serif
+    display: table-cell
+    text-align: center
+    vertical-align: middle
